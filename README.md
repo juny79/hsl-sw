@@ -27,72 +27,13 @@
 ## 2) 폴더 구조(요약)
 
 hsl-integrated-ops/
-├─ inventory/
-│  ├─ assets.yaml
-│  ├─ ipam.csv
-│  ├─ vlan-plan.csv
-│  ├─ firewall-matrix.csv
-│  ├─ san-wwpn-map.csv
-│  ├─ sw-components.csv                # ★ 통합운용SW 구성요소/버전/설치경로/포트
-│  └─ sw-endpoints.csv                 # ★ 서비스별 엔드포인트/프로토콜/포트/상호의존
-├─ configs/
-│  ├─ app/
-│  │  ├─ service-topology.md           # ★ 모듈 관계(메인/미디어/EMS/D·I) & 데이터 흐름
-│  │  └─ runtime-config.md             # ★ 실행파일/설치경로/설정파일 키/로그 경로 표준
-│  └─ storage/
-│     └─ eva8000-presentations.md
-├─ build/
-│  ├─ app/
-│  │  ├─ 00-precheck.md                # 라이선스/계정/폴더권한/시간동기/백신 예외
-│  │  ├─ 10-install-main.md            # ★ 메인서버 설치(C:\home\safe\appl\opbin)
-│  │  ├─ 12-install-media.md           # ★ 미디어서버 설치(클러스터 고려)
-│  │  ├─ 14-install-ems.md             # ★ EMS 설치(C:\EMS)
-│  │  ├─ 16-install-di.md              # ★ D·I/MClient 설치(C:\mclient)
-│  │  ├─ 20-initial-config.md          # 공통 초기설정(StatusChk, NetTime, AV)
-│  │  ├─ 30-startup-procedures.md      # ★ 가동 절차(메인/미디어/EMS/D·I)
-│  │  ├─ 32-shutdown-procedures.md     # ★ 종료 절차(역순/주의점)
-│  │  ├─ 50-update-procedures.md       # ★ 패치 배포(경로/롤백)
-│  │  └─ 90-commissioning-tests.md     # 기능 검수(로그/프로세스/클러스터/표출)
-│  └─ network/
-│     ├─ 00-cabling-standards.md
-│     ├─ 10-vlan-ip-plan.md
-│     ├─ 20-core-l3-routing.md
-│     ├─ 30-firewall-matrix-to-rules.md
-│     └─ 40-san-zoning-mop.md
-├─ ops/
-│  ├─ runbooks/
-│  │  ├─ rb-main-failover.md           # ★ 메인서버 장애/슬레이브 승격/재동기화
-│  │  ├─ rb-media-cluster.md           # ★ 미디어 클러스터 오프라인/페일오버
-│  │  ├─ rb-ems-client.md              # ★ EMS 접속/표출 장애(텍스트/GUI)
-│  │  └─ rb-di-active-di.md            # ★ D·I/Active D·I 무표출/오동작
-│  ├─ checklists/
-│  │  ├─ daily-app.md                  # ★ 일일 점검(프로세스/로그/시간/클러스터)
-│  │  ├─ weekly-app.md                 # ★ 주간 점검(패치/백업/프리셋/용량)
-│  │  └─ monthly-quarterly-app.md      # ★ 월/분기(리허설/패치집중/계정검토)
-│  └─ handover/
-│     ├─ 00-oncall-quickstart.md       # 10분 요약(경로/계정·금고/우선순위)
-│     ├─ 30-mop-template.md
-│     ├─ 40-rollback-criteria.md
-│     └─ 50-uat-acceptance.md
-├─ docs/
-│  └─ app/
-│     ├─ overview.md                   # ★ 본 문서의 1장(목적/범위/용어) 통합 요약
-│     ├─ functions.md                  # ★ 2장 기능 정리(역할/동작원리/이중화)
-│     ├─ operations.md                 # ★ 3장 가동/종료 GUI 단계별 캡션(추후 이미지)
-│     ├─ recovery.md                   # ★ 4장 장애유형/복구(표+플로우)
-│     ├─ updates.md                    # ★ 5장 업데이트 대상/절차
-│     ├─ install.md                    # ★ 6장 설치 경로/권한/주의
-│     └─ org-contacts.md               # ★ 7장 조직/역할/연락처(placeholder)
-├─ diagrams/
-│  ├─ app-logic.drawio                 # (추후) 메인↔미디어↔EMS↔D·I 플로우
-│  ├─ main-ha.drawio                   # (추후) StatusChk 이중화/Failover 시퀀스
-│  ├─ media-cluster.drawio             # (추후) Cluster1(1·2)/Cluster2(3·4) 동작
-│  └─ di-active-di.drawio              # (추후) D·I/Active D·I 구성/표출 경로
-└─ scripts/
-   ├─ app-time-sync.cmd                # ★ Net Time 동기화 배치 샘플
-   ├─ app-process-check.ps1            # ★ Run/StatusChk/EMS/MClient 프로세스 점검
-   └─ app-log-collect.cmd              # ★ 로그 수집(경로 표준화)
-
+├─ inventory/ # 단일 진실원(정본)
+├─ configs/ # 골든 컨피그/정책(마스킹)
+├─ build/ # 설치/구축 절차(서버·네트워크)
+├─ ops/ # 운영 체크리스트/런북/인수인계 양식
+├─ docs/ # 해설 문서(개요/기능/운영/복구/설치)
+├─ diagrams/ # 도면 원본(drawio/mmd) + 렌더본(png/svg)
+└─ scripts/ # 경량 자동화(점검/수집/매트릭스)
    
 ### 2.1 inventory/ (정본)
 - `assets.yaml` : 서버/스토리지/SAN/네트워크 자산 정보  
