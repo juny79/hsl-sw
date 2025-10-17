@@ -26,6 +26,7 @@
 
 ## 2) 폴더 구조(요약)
 
+````
 hsl-integrated-ops/
 ├─ inventory/
 │  ├─ assets.yaml
@@ -92,6 +93,7 @@ hsl-integrated-ops/
    ├─ app-time-sync.cmd        (Net Time 동기화 배치)
    ├─ app-process-check.ps1    (Run/StatusChk/EMS/MClient 점검)
    └─ app-log-collect.cmd      (로그 수집 표준)
+````
    
 ### 2.1 inventory/ (정본)
 - `assets.yaml` : 서버/스토리지/SAN/네트워크 자산 정보  
