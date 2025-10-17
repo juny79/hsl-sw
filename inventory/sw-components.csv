@@ -1,0 +1,7 @@
+
+component,role,version,install_path,exe,service_or_mode,ports(protocol),depends_on,logs,notes
+Main-App,Main,NA,"C:\home\safe\appl\opbin",Run.exe,Application,,StatusChk;DB;EMS,"C:\home\safe\logs\main","메인 표출/이벤트 처리"
+StatusChk,Main-HA,NA,"C:\home\safe\appl\opbin",StatusChk.exe,HA-Agent,,Main-App,"C:\home\safe\logs\ha","마스터만 Run.exe 기동"
+Media-App,Media,NA,"C:\home\safe\appl\opbin",Run.exe,Cluster-Resource,,Cluster;EVA,"C:\home\safe\logs\media","MEDIA1~4(Active/Active)"
+EMS-Client,EMS,NA,"C:\EMS",EMS.exe,Client,,,,"GUI/Text 표출"
+MClient,DI,NA,"C:\mclient",MClient.exe,Display-Client,,,,"D·I/Active D·I 표출"
